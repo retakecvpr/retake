@@ -1,0 +1,51 @@
+### model
+model_name_or_path: saves/baselines/Qwen2-VL-7B-Instruct-128k
+flash_attn: fa2
+infer_dtype: bfloat16
+longvideo_kwargs: {
+  # Keyframe compression
+  'visual_compression': True,
+  'visual_compression_kwargs': {
+    'compression_ratio': 1.0,
+    'compression_method': 'Keyframe',
+    'patch_sync': True,
+    'return_keyframe_mask': True
+  },
+  # KVCache compression
+  'kvcache_compression': True,
+  'kvcache_compression_kwargs': {
+    'compression_ratio': 0.5,
+    'compression_method': 'pivotkv',
+    'chunk_frames': 32,
+  },
+}
+
+### method
+stage: sft
+do_predict: true
+finetuning_type: full
+
+### dataset
+eval_dataset: mlvu
+template: qwen2_vl
+cutoff_len: 141072 # 131072 + 
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 2
+
+### data
+video_fps: 2
+video_frame_extraction_fps: 25
+video_maxlen: 1024
+video_resolution: 448
+
+### generate
+do_sample: false
+
+### output
+output_dir: saves/qwen2vl_7b_128k_mlvu_f1024_r448/lf_predict_keyframe-c1_ch2o05
+overwrite_output_dir: true
+
+### eval
+per_device_eval_batch_size: 1
+predict_with_generate: true

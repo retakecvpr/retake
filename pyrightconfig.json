@@ -1,0 +1,10 @@
+{
+    "exclude": [
+        "LLaMA-Factory/data",
+        "LLaMA-Factory/saves",
+        "dataset",
+        "results",
+    ],
+    "reportMissingTypeStubs": false,
+    "typeCheckingMode": "off"
+}

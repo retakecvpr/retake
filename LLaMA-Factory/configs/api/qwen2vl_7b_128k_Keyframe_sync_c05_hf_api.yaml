@@ -1,0 +1,20 @@
+### model
+model_name_or_path: saves/baselines/Qwen2-VL-7B-Instruct-128k
+flash_attn: fa2
+infer_dtype: bfloat16
+infer_backend: huggingface
+longvideo_kwargs: {
+  'visual_compression': True,
+  'compression_ratio': 0.5,
+  'compression_method': 'Keyframe',
+  'patch_sync': True
+}
+
+### generate
+do_sample: false
+
+### method
+stage: sft
+vllm_maxlen: 131072
+finetuning_type: full
+template: qwen2_vl
